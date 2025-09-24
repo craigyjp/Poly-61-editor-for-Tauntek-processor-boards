@@ -8,7 +8,7 @@
 #define EEPROM_UPDATE_PARAMS 5
 #define EEPROM_SAVE_CURRENT 6
 #define EEPROM_SAVE_ALL 7
-#define EEPROM_ROM_TYPE 8
+
 #define EEPROM_LOAD_RAM 9
 #define EEPROM_BANK_SELECT 10
 #define EEPROM_ENCODER_ACCELERATE 11
@@ -106,18 +106,6 @@ boolean getLoadFactory() {
 void storeLoadFactory(byte lfupdate)
 {
   EEPROM.write(EEPROM_LOAD_FACTORY, lfupdate);
-  EEPROM.commit();
-}
-
-boolean getROMType() {
-  byte rt = EEPROM.read(EEPROM_ROM_TYPE); 
-  if (rt < 0 || rt > 1)return true;
-  return rt ? true : false;
-}
-
-void storeROMType(byte rtupdate)
-{
-  EEPROM.write(EEPROM_ROM_TYPE, rtupdate);
   EEPROM.commit();
 }
 

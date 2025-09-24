@@ -6,13 +6,12 @@ const char* VERSION = "V1.2";
 #define HEADER_BYTES 5
 #define SYSEX_END 0xF7
 
-#define RE_READ -9
 #define NO_OF_PARAMS 30
 const char* INITPATCHNAME = "Initial Patch";
 #define HOLD_DURATION 1000
 const uint32_t CLICK_DURATION = 250;
 #define PATCHES_LIMIT 999
-String INITPATCH = "A Piano, 8, 1, 99, 4, 1, 99, 34, 51, 1, 0, 49, 2, 32, 63, 8, 57, 16, 58, 11, 1, 0, 0, 4, 0, 17, 0, 3, 0, 0, 0, 4, 1, 10, 54, 0, 11, 50, 14, 23, 11, 99, 47, 1, 99, 85";
+String INITPATCH = "A Piano, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0";
 
 // Create and populate the array with data
 

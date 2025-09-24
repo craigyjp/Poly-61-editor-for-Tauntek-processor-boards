@@ -132,7 +132,6 @@ void setup() {
 
   //Read UpdateParams type from EEPROM
   updateParams = getUpdateParams();
-  ROMType = getROMType();
 
   //MIDI 5 Pin DIN
   Serial2.begin(31250, SERIAL_8N1, 16, 17);  // RX, TX
@@ -146,13 +145,6 @@ void setup() {
   MIDI.setHandleSystemExclusive(handleSysexByte);
   MIDI.turnThruOn(midi::Thru::Mode::Off);
   Serial.println("MIDI In DIN Listening");
-
-  // Serial2.begin(31250, SERIAL_8N1, 17, 12);  // RX, TX
-  // MIDI5.begin();
-
-  // MIDI5.setHandleSystemExclusive(handleSysexByte);
-  // //MIDI5.turnThruOn(midi::Thru::Mode::Off);
-  // Serial.println("MIDI5 In DIN Listening");
 
   //Read Encoder Direction from EEPROM
   encCW = getEncoderDir();
@@ -2123,8 +2115,6 @@ void loop() {
 
   if (!recallPatchFlag) {
     MIDI.read(midiChannel);
-    //usbMIDI.read(midiChannel);
-    //MIDI5.read(midiChannel);
   }
 
   if (!receivingSysEx) {
@@ -2143,10 +2133,8 @@ void loop() {
     waitingToUpdate = false;
   }
 
-  //Print data if the entire SysEx message is complete
   if (sysexComplete) {
     sysexComplete = false;  // Reset for the next SysEx message
-    //printSysex();
     showCurrentParameterPage("Processing", String("Sysex Dump"));
     startParameterDisplay();
     convertNibblesToBytes();
@@ -2154,23 +2142,5 @@ void loop() {
     currentBlock = 0;  // Reset to start filling from block 0 again
     byteIndex = 0;     // Reset byte index within the block
     receivingSysEx = false;
-  }
-}
-
-void printSysex() {
-  Serial.print("Patch 1  ");
-  for (int i = 0; i < 80; i++) {
-    for (int j = 0; j < 24; j++) {
-      if (ramArray[i][j] < 0x10) Serial.print("0");  // add leading zero
-      Serial.print(ramArray[i][j], HEX);
-      Serial.print(",");
-      Serial.print(" ");
-      if (j == 23) {
-        Serial.println();
-        Serial.print("Patch ");
-        Serial.print(i + 2);
-        Serial.print("  ");
-      }
-    }
   }
 }

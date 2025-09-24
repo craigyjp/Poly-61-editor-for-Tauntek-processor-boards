@@ -18,7 +18,6 @@ unsigned sysexIndex = 0;
 
 // Final decoded patches (12 bytes each)
 byte receivedPatches[NUM_PATCHES][PATCH_BYTES];
-const byte expectedHeader[5] = {0xF0, 0x42, 0x50, 0x36, 0x31};
 bool sendingSysEx = false;
 bool receivingSysEx = false;
 bool sysexComplete = false;
@@ -48,9 +47,6 @@ boolean recallPatchFlag = true;
 boolean loadFactory = false;
 boolean loadRAM = false;
 boolean loadFromDW = false;
-boolean ROMType = false;
-boolean dataInProgress = false;
-int currentSendPatch = 0;
 boolean saveCurrent = false;
 boolean afterTouch = false;
 boolean saveAll = false;
@@ -59,10 +55,6 @@ byte accelerate = 1;
 int speed = 1;
 boolean updateParams = false;  //(EEPROM)
 int bankselect = 0;
-int old_value = 0;
-int old_param_offset = 0;
-int received_patch = 0;
-
 
 int osc1_octave = 0;
 int osc1_wave = 0;
